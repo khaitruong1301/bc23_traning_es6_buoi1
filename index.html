@@ -8,14 +8,99 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-      
+    <div class="container mt-2" style="margin-bottom: 500px;">
+      <h3>Bài tập 1: Ví dụ var let const</h3>
+      <button id="btn">0</button>
+      <button>1</button>
+      <button>2</button>
+      <hr />
+      <h3>Bài tập 2: Thay đổi màu sắc</h3>
+      <div class="mt-2">
+        <h3 id="home" class="fa fa-home" style="font-size: 100px;"></h3>
+
+        <div id="colors">
+          <!-- <button class="btn" style="background-color: red;">Red</button> -->
+        </div>
+
+      </div>
+      <hr />
+      <h3>Đã update</h3>
+      <div id="frmNhanVien">
+        <div class="row">
+          <div class="col-6">
+            <h3>Thông tin nhân viên</h3>
+            <div class="form-group">
+              <p>Mã nhân viên</p>
+              <input class="form-control" id="maNhanVien" />
+            </div>
+            <div class="form-group">
+              <p>Tên nhân viên</p>
+              <input class="form-control" id="tenNhanVien" />
+            </div>
+            <div class="form-group">
+              <p>Lương cơ bản</p>
+              <input class="form-control" id="luongCB" />
+            </div>
+            <div class="form-group">
+              <p>Số giờ làm</p>
+              <input class="form-control" id="soGioLam" />
+            </div>
+            <div class="form-group">
+              <p>Số ngày nghỉ</p>
+              <input class="form-control" id="soNgayNghi" />
+            </div>
+            <div class="form-group">
+              <p>Loại nhân viên</p>
+              <select id="loaiNhanVien" class="form-control">
+                <option>Giám đốc</option>
+                <option>Quản lý</option>
+                <option>Nhân viên</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button id="btnXacNhan" class="btn btn-danger">Xác nhận</button>
+            </div>
+          </div>
+          <div class="col-6">
+            <h3>Thông tin nhân viên hiển thị</h3>
+            <table class="table">
+                <tbody class="bg-dark text-white" id="tblNhanVien">
+                  <tr>
+                    <td>Mã nhân viên</td>
+                    <td>1</td>
+                    
+                  </tr>
+                  <tr>
+                    <td>tenNhanVien</td>
+                    <td>Nguyễn văn A</td>
+                    
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <style>
+        #frmNhanVien input, #frmNhanVien select {
+          /* background-color: red !important;
+          color: white !important; */
+        }
+      </style>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./index.js"></script>
+    
+   
+   
+    <script type="module" src="./index.js"></script>
+
+        
 </body>
 </html>
