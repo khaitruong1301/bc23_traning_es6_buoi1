@@ -416,7 +416,7 @@ let arrProd123 = {
 // console.log('prod3',arrProd123.zzz00);
 // console.log('prod1',arrProd123['0xxx']);
 
-for(let key in arrProd123) {
+for (let key in arrProd123) {
     console.log('pro', arrProd123[key]);
 }
 /* 
@@ -427,21 +427,21 @@ for(let key in arrProd123) {
 document.getElementById('btnXacNhan').onclick = () => {
 
     var arrInput = document.querySelectorAll('#frmNhanVien input, #frmNhanVien select');
-    console.log('arrInput',arrInput);
+    console.log('arrInput', arrInput);
     let nhanVien = {};
     for (let input of arrInput) {
         // input.style.color = 'orange';
-        let {id,value,style} = input;
+        let { id, value, style } = input;
         // let id = input.id;
         // let value = input.value;
         // console.log(id,value);
-        nhanVien = {...nhanVien,[id]:value}
+        nhanVien = { ...nhanVien, [id]: value }
     }
-    console.log('nhanVien',nhanVien)
+    console.log('nhanVien', nhanVien)
     //Hiển thị thông tin nhân viên
     //nhanVien = {maNhanVien:'1',tenNhanVien:'Nguyen van A', luongCoBan:'1000',soGioLam:'100',soNgayNghi:10,chucVu:'GiamDoc'}
     let contentHTML = '';
-    for(let key in nhanVien) {
+    for (let key in nhanVien) {
         contentHTML += `
             <tr>
                 <td>${key}</td>
@@ -454,7 +454,7 @@ document.getElementById('btnXacNhan').onclick = () => {
 }
 
 
-import {NhanVien,DOMAIN_BACKEND,getApiXoa} from './models/NhanVien.js';
+import { NhanVien, DOMAIN_BACKEND, getApiXoa } from './models/NhanVien.js';
 // import {getApiXoa} from './models/NhanVien.js';
 //import default có thể rename giá trị import và không có dấu {}
 import NHAN_VIEN from './models/NhanVien.js';
@@ -462,26 +462,26 @@ import NHAN_VIEN from './models/NhanVien.js';
 
 let nv = new NhanVien();
 nv.maNhanVien = 1;
-nv.tenNhanVien ='ABC';
-console.log('nv',nv);
+nv.tenNhanVien = 'ABC';
+console.log('nv', nv);
 
 
 console.log(getApiXoa(10));
 
-import  './node_modules/lodash/lodash.min.js';
+import './node_modules/lodash/lodash.min.js';
 // import _ from 'lodash';
 
 console.log(_);
 
 let obA = {
-    id:1
+    id: 1
 }
 
 let obB = {
-    id:2
+    id: 2
 }
 
-console.log(_.isEqual(obA,obB)) 
+console.log(_.isEqual(obA, obB))
 
 let arrProd789 = [
     { id: 1, name: 'China', price: 1000, img: 'https://i.pravatar.cc?u=1' }, //0
@@ -492,7 +492,308 @@ let arrProd789 = [
 
 ]
 
-let resultOrder =_.orderBy(arrProd789, ['name','price'])
+let resultOrder = _.orderBy(arrProd789, ['name', 'price'])
 
-console.log('resultOrder',resultOrder)
+console.log('resultOrder', resultOrder)
 
+/* ------------- Các phương thức xử lý mảng ---------------------- */
+
+let mangDienThoai = [
+    { maSP: 1, tenSP: 'Sony xpreria xz2', gia: 1750, hangSX: 'SONY' },
+    { maSP: 2, tenSP: 'Sony xpreria xz1', gia: 1550, hangSX: 'SONY' },
+    { maSP: 3, tenSP: 'Sony xpreria xz premium', gia: 1850, hangSX: 'SONY' },
+    { maSP: 4, tenSP: 'Google pixel xl', gia: 2750, hangSX: 'GOOGLE' },
+    { maSP: 5, tenSP: 'Google pixel 2', gia: 1750, hangSX: 'GOOGLE' },
+    { maSP: 6, tenSP: 'Google pixel XL', gia: 1750, hangSX: 'GOOGLE' },
+    { maSP: 7, tenSP: 'Samsung galaxy s10 plus', gia: 2750, hangSX: 'SAMSUNG' },
+    { maSP: 8, tenSP: 'Samsung galaxy s10 5g', gia: 3750, hangSX: 'SAMSUNG' },
+]
+{
+    // function laySPSony () {
+    //     //output: array các sản phẩm là sony
+    //     let arrSony = [];
+    //     for(let sanPham of mangDienThoai) {
+    //         //Mỗi lần duyệt qua 1 sản phẩm lấy ra hãng sản xuất để kiểm tra
+    //         if(sanPham.hangSX === 'SONY') {
+    //             arrSony.push(sanPham);
+    //         }
+    //     }
+    //     console.log('điện thoại sony', arrSony);
+    // }
+    // laySPSony();
+
+
+}
+/*
+    filter: filter là phương thức của mảng trả về giá trị là 1 MẢNG thoã điêu kiện arrow function bên trong. Nếu không có kết quả nào thoã điều kiện thì filter trả về mảng rỗng
+*/
+function laySPSonyFilter() {
+    let result = mangDienThoai.filter(sanPham => sanPham.hangSX === 'SONY');
+    console.log('spSony', result)
+}
+// laySPSonyFilter();
+/*
+    find: Dùng để lấy ra 1 object của mảng thoã điều kiện arrow function . Nếu có nhiều phần tử khớp điều kiện thì find vẫn trả về 1 phần tử đầu tiên tìm thấy. find thường dũng để tìm kiếm trên các trường mã định danh (MaSinhVien,MaNhanVien,CMND,Sdt, email ). Thường ta sẽ dùng hàm find để tìm kiếm và cập nhật phần tử đó.
+    Nếu không có phần tử nào thoã điều kiện => kết quả undefine
+*/
+
+function capNhatGiaTheoPhanTram(maSanPham, phanTram) {
+    let sanPham = mangDienThoai.find(sanPham => sanPham.maSP === maSanPham);
+    if (sanPham) { //Nếu tìm thấy thì cập nhật giá tiền
+        sanPham.gia = sanPham.gia + (sanPham.gia * phanTram / 100);
+        console.log('Sản phẩm ', maSanPham, sanPham);
+    }
+    else {
+        //Nếu không tìm thấy
+        console.log('Không tìm thấy', maSanPham);
+    }
+}
+// capNhatGiaTheoPhanTram(10, 20);
+
+/*
+    findIndex: Tương tự find chỉ trả về 1 giá trị đầu tiên tìm thấy, tuy nhiên giá trị trả về là chỉ số index (thay vì find là phần tử). Nếu không có phần tử nào thoã điều kiện => trả về -1. 
+    => findIndex thường dùng để xoá hoặc chèn phần tử
+*/
+
+function xoaSanPham(maSanPham) {
+    let index = mangDienThoai.findIndex((sanPham, index) => sanPham.maSP === maSanPham);
+    if (index !== -1) {
+        mangDienThoai.splice(index, 1); //Tìm thấy xoá tại vị trí index của mảng
+        console.log(mangDienThoai)
+    } else {
+        console.log('Tìm không thấy sản phẩm có mã ', maSanPham);
+    }
+}
+xoaSanPham(6);
+
+/*
+    foreach: Dùng để thực hiện hành động trên tất cả phần tử trong mảng. Có thể dùng thay thế for in, for of, hoặc for index = 0 -> length của mảng. Foreach trả về undefine
+*/
+
+function tangGiaSP(phanTram) {
+    let result = mangDienThoai.forEach((sanPham, index) => {
+        //Xử lý tăng giá    
+        sanPham.gia += sanPham.gia * phanTram / 100;
+        // return 123;
+    })
+    console.log('Sản phẩm sau khi tăng giá', phanTram, mangDienThoai);
+    console.log(result);
+}
+tangGiaSP(15);
+
+//CRUD: Create , Read , Update, Delete
+
+let arrHangSanXuat = [
+    { maHSX: 'SONY', tenHSX: 'Công ty công nghệ cao SONY', diaDiem: '100 cao thắng q10', khuVuc: 'MienNam' },
+    { maHSX: 'APPLE', tenHSX: 'Công ty công nghệ cao APPLE', diaDiem: '110 cao thắng q10', khuVuc: 'MienNam' },
+    { maHSX: 'XIAOMI', tenHSX: 'Công ty công nghệ cao XIAOMI', diaDiem: '200 Trần Hưng Đạo', khuVuc: 'MienBac' },
+]
+
+/*
+    Hiển thị thẻ select
+    <select>
+        <option value="mã hãng">Tên hãng</option>
+    </select>
+    [Công ty ...]
+*/
+/*
+    map : Là 1 hàm dùng để biến đổi mảng này thành mảng khác.
+*/
+function convertArrayOption() {
+
+    let arrOption = arrHangSanXuat.map((hangSX, index) => {
+        let newOption = { value: hangSX.maHSX, text: hangSX.tenHSX };
+        return newOption; //Kế quả trả về sẽ được add vào mảng kết quả
+    });
+
+    console.log('arrOption', arrOption);
+}
+// convertArrayOption()
+
+function convertArrToHTML() {
+
+    let arrHTML = arrHangSanXuat.map((hangSX, index) => {
+        return `
+            <div class="col-4">
+                <img class="w-100" src="https://i.pravatar.cc?u=${hangSX.maHSX}" alt="..." />
+                <div class="card-body bg-dark text-white">
+                    <p>${hangSX.tenHSX}</p>
+                    <p>${hangSX.diaDiem}</p>
+                </div>
+            </div>
+        `
+    })
+
+    console.log('arrHTML', arrHTML);
+    return arrHTML;
+}
+
+let sHTML = convertArrToHTML();
+function renderHTML() {
+    //Duyệt qua các chuỗi html trong mảng sHTML
+    sHTML.forEach((html, index) => {
+        //Mỗi lần duyệt đưa giá trị html đó lên giao diện
+        document.querySelector('#danhSachHangSX').innerHTML += html;
+    })
+}
+renderHTML();
+
+/*
+    reducer: Tương tự map truy nhiên duyệt qua n phần tử để trả về 1 giá trị (string, boolean, number, null, undefine, array, object ,...).
+    Reduce nhận vào 2 tham số 
+    +tham số 1: callback chạy n lần
+    +tham số 2: là giá trị bắt đầu cho tham số 1 của callback
+
+*/
+
+function tinhTongTien() {
+    let mangDienThoai = [
+        { maSP: 1, tenSP: 'Sony xpreria xz2', gia: 1750, hangSX: 'SONY' },
+        { maSP: 2, tenSP: 'Sony xpreria xz1', gia: 1550, hangSX: 'SONY' },
+        { maSP: 3, tenSP: 'Sony xpreria xz premium', gia: 1850, hangSX: 'SONY' },
+        { maSP: 4, tenSP: 'Google pixel xl', gia: 2750, hangSX: 'GOOGLE' },
+        { maSP: 5, tenSP: 'Google pixel 2', gia: 1750, hangSX: 'GOOGLE' },
+        { maSP: 6, tenSP: 'Google pixel XL', gia: 1750, hangSX: 'GOOGLE' },
+        { maSP: 7, tenSP: 'Samsung galaxy s10 plus', gia: 2750, hangSX: 'SAMSUNG' },
+        { maSP: 8, tenSP: 'Samsung galaxy s10 5g', gia: 3750, hangSX: 'SAMSUNG' },
+    ]
+    let result = mangDienThoai.reduce((tongTien, sanPham, index) => {
+
+        return tongTien + sanPham.gia;//1750 3300 5150 ....
+    }, 0);
+    return result;
+}
+
+console.log('Tổng tiền', tinhTongTien());
+
+
+function renderSanPham() {
+    let mangDienThoai = [
+        { maSP: 1, tenSP: 'Sony xpreria xz2', gia: 1750, hangSX: 'SONY' },
+        { maSP: 2, tenSP: 'Sony xpreria xz1', gia: 1550, hangSX: 'SONY' },
+        { maSP: 3, tenSP: 'Sony xpreria xz premium', gia: 1850, hangSX: 'SONY' },
+        { maSP: 4, tenSP: 'Google pixel xl', gia: 2750, hangSX: 'GOOGLE' },
+        { maSP: 5, tenSP: 'Google pixel 2', gia: 1750, hangSX: 'GOOGLE' },
+        { maSP: 6, tenSP: 'Google pixel XL', gia: 1750, hangSX: 'GOOGLE' },
+        { maSP: 7, tenSP: 'Samsung galaxy s10 plus', gia: 2750, hangSX: 'SAMSUNG' },
+        { maSP: 8, tenSP: 'Samsung galaxy s10 5g', gia: 3750, hangSX: 'SAMSUNG' },
+    ]
+    let result = mangDienThoai.reduce((html, sanPham, index) => {
+        // let stringHTML = html + ``
+        return html + `
+            <div class="col-4">
+                <img class="w-100 mt-2" src="https://i.pravatar.cc?u=${sanPham.maSP}" alt="..." />
+                <div class="card-body bg-dark text-white">
+                    <p>${sanPham.tenSP}</p>
+                    <p>${sanPham.gia}</p>
+                </div>
+            </div>
+        `
+    }, '');
+    document.querySelector('#danhSachSP').innerHTML = result;
+}
+renderSanPham();
+
+/*
+    reverse: hàm đảo ngược mảng
+*/
+
+
+mangDienThoai.reverse();
+
+console.log('mangDienThoai', mangDienThoai);
+
+
+/*
+    sort() : 
+
+*/
+
+function sapXepTheoTen () {
+    let mangDienThoai = [
+        { maSP: 1, tenSP: 'Sony xpreria xz2', gia: 1750, hangSX: 'SONY' },
+        { maSP: 2, tenSP: 'Sony xpreria xz1', gia: 1550, hangSX: 'SONY' },
+        { maSP: 3, tenSP: 'Sony xpreria xz premium', gia: 1850, hangSX: 'SONY' },
+        { maSP: 4, tenSP: 'Google pixel xl', gia: 2750, hangSX: 'GOOGLE' },
+        { maSP: 5, tenSP: 'Google pixel 2', gia: 1750, hangSX: 'GOOGLE' },
+        { maSP: 6, tenSP: 'Google pixel XL', gia: 1750, hangSX: 'GOOGLE' },
+        { maSP: 7, tenSP: 'Samsung galaxy s10 plus', gia: 2750, hangSX: 'SAMSUNG' },
+        { maSP: 8, tenSP: 'Samsung galaxy s10 5g', gia: 3750, hangSX: 'SAMSUNG' },
+    ]
+    let result = mangDienThoai.sort((sp,spTruocDo) => {
+        let tenSP = sp.tenSP.toLowerCase().trim(); //z1
+        let tenSPTruoc = spTruocDo.tenSP.toLowerCase().trim(); //z2
+
+        if(tenSP < tenSPTruoc) { //Nếu sai yêu cầu sx
+            return -1;
+        }
+        return 1;
+    });
+
+    console.log('result',result);
+}
+sapXepTheoTen();
+
+
+function sapXepTheoGia () {
+
+    let result = mangDienThoai.sort((sp,spTruoc) => {
+
+        return sp.gia - spTruoc.gia;
+    });
+    console.log('result theo giá',result);
+
+}
+sapXepTheoGia()
+// '11' '22' '23' '3' '33' 
+// 11 22 23 3 33
+
+// 3 11 22 23 33
+
+// let m
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(_);
+
+//_.join: Dùng để tạo ra 1 chuỗi từ mảng kèm theo ký tự định nghĩa
+
+let result = ['0072','0086','3132','1123'];
+
+let [maVung,maNganHang,maCongTy,maChiNhanh] = result;
+
+console.log(_.join(result,'-'));
+
+//_.isEqual: So sánh các giá trị thuộc tính của object và array có bằng nhau không
+
+let svA = {
+    id:1,
+    name:'Nguyễn Văn Tèo',
+    info : {
+        phone:'090909',
+        address: '123 cao thắng'
+    }
+}
+
+let svB = {
+    id:1,
+    name:'Nguyễn Văn Tèo',
+    info : {
+        phone:'090909',
+        address: '123 cao thắng'
+    }
+}
+
+console.log(_.includes(svB,1),'object')
+
+// console.log(svA === svB);
+console.log(_.isEqual(svA,svB), 'kết quả');
